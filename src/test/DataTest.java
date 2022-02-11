@@ -1,13 +1,17 @@
 package test;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.Ignore;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import model.Data;
 import model.Perso;
+import model.Player;
 import utility.Utility;
 
 class DataTest {
@@ -71,7 +75,7 @@ class DataTest {
 		Utility.fillMap(dTest);
 
 		// WHEN
-		Utility.createPerso(dTest);
+		Utility.createPersoAndFill(dTest);
 
 		// THEN
 		assertEquals(6, dTest.alPerso.size());
@@ -105,10 +109,9 @@ class DataTest {
 	void checkIfPersoOnMap() {
 		// GIVEN
 		Utility.fillMap(dTest);
-		Utility.createPerso(dTest);
 
 		// WHEN
-		Utility.fillMapWithPerso(dTest);
+		Utility.createPersoAndFill(dTest);
 
 		// THEN
 		for (int i = 0; i < dTest.alPerso.size(); i++) {
@@ -131,8 +134,7 @@ class DataTest {
 	void nbrOfPersoOnMapTest() {
 
 		Utility.fillMap(dTest);
-		Utility.createPerso(dTest);
-		Utility.fillMapWithPerso(dTest);
+		Utility.createPersoAndFill(dTest);
 
 		int countPersoOnMap = 0;
 
@@ -146,6 +148,68 @@ class DataTest {
 		}
 
 		assertEquals(dTest.alPerso.size(), countPersoOnMap);
+	}
+
+	// @Test
+	@Ignore
+	void checkIfInputStringDoesNotReturnNullTest() {
+		// GIVEN
+
+		// WHEN
+		String result = Utility.inputString();
+
+		// THEN
+		assertNotNull(result);
+
+	}
+
+	@Ignore
+	// @Test
+	void checkIfInputStringDoesNotReturnEmptyTest() {
+		// GIVEN
+
+		// WHEN
+		String result = Utility.inputString();
+
+		// THEN
+		assertFalse(result.isEmpty());
+
+	}
+
+	@Test
+	public void movePlayerOnMapSuccessTest() {
+		// GIVEN
+		Utility.fillMap(dTest);
+
+		Perso p = new Player("Ad", 5, 5);
+		dTest.map[p.getX()][p.getY()] = p.getName().charAt(0);
+
+		// WHEN
+		Utility.movePerso(dTest);
+
+		// THEN
+		assertTrue((dTest.map[p.getX() + 1][p.getY()] == p.getName().charAt(0)
+				|| dTest.map[p.getX() - 1][p.getY()] == p.getName().charAt(0)
+				|| dTest.map[p.getX()][p.getY() + 1] == p.getName().charAt(0)
+				|| dTest.map[p.getX()][p.getY() - 1] == p.getName().charAt(0))
+				&& dTest.map[p.getX()][p.getY()] != p.getName().charAt(0));
+	}
+
+	@Test
+	public void movePlayerOnMapBorderKOTest() {
+		// GIVEN
+		Utility.fillMap(dTest);
+
+		Perso p = new Player("Ad", 1, 1);
+		dTest.map[p.getX()][p.getY()] = p.getName().charAt(0);
+
+		// WHEN
+		Utility.movePerso(dTest);
+
+		// THEN
+		assertTrue(dTest.map[p.getX() + 1][p.getY()] == '0' //
+				|| dTest.map[p.getX()][p.getY() - 1] == '0' //
+				|| dTest.map[p.getX()][p.getY()] == p.getName().charAt(0));
 	}
 
 }

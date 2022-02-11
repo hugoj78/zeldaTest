@@ -1,5 +1,6 @@
 package utility;
 
+import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
 import model.Data;
@@ -30,9 +31,12 @@ public class Utility {
 		}
 	}
 
-	public static void createPerso(Data data) {
+	public static void createPersoAndFill(Data data) {
 
-		data.alPerso.add(new Player("Player", randomXY(1, 8), randomXY(1, 8)));
+		Player player = new Player("Player", randomXY(1, 8), randomXY(1, 8));
+		data.alPerso.add(player);
+
+		data.map[player.getX()][player.getY()] = player.getName().charAt(0);
 
 		for (int i = 0; i < 5; i++) {
 
@@ -43,7 +47,11 @@ public class Utility {
 				y = randomXY(1, 8);
 			} while (data.map[x][y] != ' ');
 
-			data.alPerso.add(new Enemy("Enemy " + i, x, y));
+			Enemy enemy = new Enemy("Enemy " + i, x, y);
+
+			data.alPerso.add(enemy);
+
+			data.map[enemy.getX()][enemy.getY()] = enemy.getName().charAt(0);
 
 		}
 	}
@@ -52,14 +60,20 @@ public class Utility {
 		return ThreadLocalRandom.current().nextInt(min, max + 1);
 	}
 
-	public static void fillMapWithPerso(Data data) {
-
-		for (int i = 0; i < data.alPerso.size(); i++) {
-			Perso perso = data.alPerso.get(i);
-
-			data.map[perso.getX()][perso.getY()] = perso.getName().charAt(0);
-
+	public static String inputString() {
+		try {
+			Scanner sc = new Scanner(System.in);
+			return sc.next();
+		} catch (Exception e) {
+			return e.getMessage();
 		}
 
 	}
+
+	public static void movePerso(Data d) {
+		for (Perso element : d.alPerso) {
+
+		}
+	}
+
 }

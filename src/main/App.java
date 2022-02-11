@@ -14,8 +14,7 @@ public class App {
 		Utility.fillMap(d);
 		Utility.printMap(d);
 
-		Utility.createPerso(d);
-		Utility.fillMapWithPerso(d);
+		Utility.createPersoAndFill(d);
 
 		System.out.println("\n---- Placement ----\n");
 

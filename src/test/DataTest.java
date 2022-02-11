@@ -190,13 +190,14 @@ class DataTest {
 		int tempY = p.getY();
 
 		// WHEN
-		Utility.movePerso(dTest);
+		Utility.switchMovePlayer(dTest, p, "q");
+		// Utility.movePerso(dTest);
 
 		// THEN
-		assertTrue((dTest.map[p.getX() + 1][tempY] == p.getName().charAt(0)
-				|| dTest.map[p.getX() - 1][tempY] == p.getName().charAt(0)
-				|| dTest.map[tempX][p.getY() + 1] == p.getName().charAt(0)
-				|| dTest.map[tempX][p.getY() - 1] == p.getName().charAt(0))
+		assertTrue((dTest.map[tempX + 1][tempY] == p.getName().charAt(0)
+				|| dTest.map[tempX - 1][tempY] == p.getName().charAt(0)
+				|| dTest.map[tempX][tempY + 1] == p.getName().charAt(0)
+				|| dTest.map[tempX][tempY - 1] == p.getName().charAt(0))
 				&& dTest.map[tempX][tempY] != p.getName().charAt(0));
 	}
 
@@ -216,10 +217,10 @@ class DataTest {
 		Utility.movePerso(dTest);
 
 		// THEN
-		assertTrue((dTest.map[p.getX() + 1][tempY] == p.getName().charAt(0)
-				|| dTest.map[p.getX() - 1][tempY] == p.getName().charAt(0)
-				|| dTest.map[tempX][p.getY() + 1] == p.getName().charAt(0)
-				|| dTest.map[tempX][p.getY() - 1] == p.getName().charAt(0))
+		assertTrue((dTest.map[tempX + 1][tempY] == p.getName().charAt(0)
+				|| dTest.map[tempX - 1][tempY] == p.getName().charAt(0)
+				|| dTest.map[tempX][tempY + 1] == p.getName().charAt(0)
+				|| dTest.map[tempX][tempY - 1] == p.getName().charAt(0))
 				&& dTest.map[tempX][tempY] != p.getName().charAt(0));
 	}
 
@@ -243,10 +244,10 @@ class DataTest {
 			int tempX = Integer.parseInt(perso.getName().substring(1, 2));
 			int tempY = tempX;
 
-			assertTrue((dTest.map[perso.getX() + 1][tempY] == perso.getName().charAt(0)
-					|| dTest.map[perso.getX() - 1][tempY] == perso.getName().charAt(0)
-					|| dTest.map[tempX][perso.getY() + 1] == perso.getName().charAt(0)
-					|| dTest.map[tempX][perso.getY() - 1] == perso.getName().charAt(0))
+			assertTrue((dTest.map[tempX + 1][tempY] == perso.getName().charAt(0)
+					|| dTest.map[tempX - 1][tempY] == perso.getName().charAt(0)
+					|| dTest.map[tempX][tempY + 1] == perso.getName().charAt(0)
+					|| dTest.map[tempX][tempY - 1] == perso.getName().charAt(0))
 					&& dTest.map[tempX][tempY] != perso.getName().charAt(0));
 		}
 
@@ -268,8 +269,8 @@ class DataTest {
 		Utility.movePerso(dTest);
 
 		// THEN
-		assertTrue(dTest.map[p.getX() + 1][tempY] == p.getName().charAt(0) //
-				|| dTest.map[tempX][p.getY() - 1] == p.getName().charAt(0) //
+		assertTrue(dTest.map[tempX + 1][tempY] == p.getName().charAt(0) //
+				|| dTest.map[tempX][tempY + 1] == p.getName().charAt(0) //
 				|| dTest.map[tempX][tempY] == p.getName().charAt(0));
 	}
 
@@ -289,8 +290,8 @@ class DataTest {
 		Utility.movePerso(dTest);
 
 		// THEN
-		assertTrue(dTest.map[p.getX() + 1][tempY] == p.getName().charAt(0) //
-				|| dTest.map[tempX][p.getY() - 1] == p.getName().charAt(0) //
+		assertTrue(dTest.map[tempX + 1][tempY] == p.getName().charAt(0) //
+				|| dTest.map[tempX][tempY + 1] == p.getName().charAt(0) //
 				|| dTest.map[tempX][tempY] == p.getName().charAt(0));
 	}
 

@@ -22,8 +22,10 @@ public class App {
 
 		System.out.println("\n---- Deplacement ----\n");
 
-		Utility.movePerso(d);
-		Utility.printMap(d);
+		while (true) {
+			Utility.movePerso(d);
+			Utility.printMap(d);
+		}
 
 	}
 

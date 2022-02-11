@@ -119,7 +119,49 @@ public class Utility {
 				}
 
 			} else if (perso.getName().charAt(0) == 'E') {
+				int x = randomXY(1, 4);
 
+				switch (x) {
+				case 1:
+					if (d.map[perso.getX()][perso.getY() - 1] == ' ') {
+
+						d.map[perso.getX()][perso.getY()] = ' ';
+						perso.setY(perso.getY() - 1);
+						d.map[perso.getX()][perso.getY()] = perso.getName().charAt(0);
+
+					}
+					break;
+				case 2:
+					if (d.map[perso.getX() + 1][perso.getY()] == ' ') {
+
+						d.map[perso.getX()][perso.getY()] = ' ';
+						perso.setX(perso.getX() + 1);
+						d.map[perso.getX()][perso.getY()] = perso.getName().charAt(0);
+
+					}
+					break;
+				case 3:
+					if (d.map[perso.getX()][perso.getY() + 1] == ' ') {
+
+						d.map[perso.getX()][perso.getY()] = ' ';
+						perso.setY(perso.getY() + 1);
+						d.map[perso.getX()][perso.getY()] = perso.getName().charAt(0);
+
+					}
+					break;
+				case 4:
+					if (d.map[perso.getX() - 1][perso.getY()] == ' ') {
+
+						d.map[perso.getX()][perso.getY()] = ' ';
+						perso.setX(perso.getX() - 1);
+						d.map[perso.getX()][perso.getY()] = perso.getName().charAt(0);
+
+					}
+					break;
+
+				default:
+					System.out.println("Mauvais random");
+				}
 			}
 		}
 	}

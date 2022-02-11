@@ -184,6 +184,7 @@ class DataTest {
 
 		Perso p = new Player("Ad", 5, 5);
 		dTest.map[p.getX()][p.getY()] = p.getName().charAt(0);
+		dTest.alPerso.add(p);
 
 		int tempX = p.getX();
 		int tempY = p.getY();
@@ -192,10 +193,10 @@ class DataTest {
 		Utility.movePerso(dTest);
 
 		// THEN
-		assertTrue((dTest.map[p.getX() + 1][p.getY()] == p.getName().charAt(0)
-				|| dTest.map[p.getX() - 1][p.getY()] == p.getName().charAt(0)
-				|| dTest.map[p.getX()][p.getY() + 1] == p.getName().charAt(0)
-				|| dTest.map[p.getX()][p.getY() - 1] == p.getName().charAt(0))
+		assertTrue((dTest.map[p.getX() + 1][tempY] == p.getName().charAt(0)
+				|| dTest.map[p.getX() - 1][tempY] == p.getName().charAt(0)
+				|| dTest.map[tempX][p.getY() + 1] == p.getName().charAt(0)
+				|| dTest.map[tempX][p.getY() - 1] == p.getName().charAt(0))
 				&& dTest.map[tempX][tempY] != p.getName().charAt(0));
 	}
 
@@ -206,6 +207,7 @@ class DataTest {
 
 		Perso p = new Enemy("En", 5, 5);
 		dTest.map[p.getX()][p.getY()] = p.getName().charAt(0);
+		dTest.alPerso.add(p);
 
 		int tempX = p.getX();
 		int tempY = p.getY();
@@ -214,11 +216,40 @@ class DataTest {
 		Utility.movePerso(dTest);
 
 		// THEN
-		assertTrue((dTest.map[p.getX() + 1][p.getY()] == p.getName().charAt(0)
-				|| dTest.map[p.getX() - 1][p.getY()] == p.getName().charAt(0)
-				|| dTest.map[p.getX()][p.getY() + 1] == p.getName().charAt(0)
-				|| dTest.map[p.getX()][p.getY() - 1] == p.getName().charAt(0))
+		assertTrue((dTest.map[p.getX() + 1][tempY] == p.getName().charAt(0)
+				|| dTest.map[p.getX() - 1][tempY] == p.getName().charAt(0)
+				|| dTest.map[tempX][p.getY() + 1] == p.getName().charAt(0)
+				|| dTest.map[tempX][p.getY() - 1] == p.getName().charAt(0))
 				&& dTest.map[tempX][tempY] != p.getName().charAt(0));
+	}
+
+	@Test
+	public void moveEnemiesOnMapSuccessTest() {
+		// GIVEN
+		Utility.fillMap(dTest);
+
+		for (int i = 1; i <= 3; i++) {
+			Perso p = new Enemy("E" + (i * 2), i * 2, i * 2);
+			dTest.map[p.getX()][p.getY()] = p.getName().charAt(0);
+			dTest.alPerso.add(p);
+		}
+
+		// WHEN
+		Utility.movePerso(dTest);
+
+		// THEN
+		for (Perso perso : dTest.alPerso) {
+
+			int tempX = Integer.parseInt(perso.getName().substring(1, 2));
+			int tempY = tempX;
+
+			assertTrue((dTest.map[perso.getX() + 1][tempY] == perso.getName().charAt(0)
+					|| dTest.map[perso.getX() - 1][tempY] == perso.getName().charAt(0)
+					|| dTest.map[tempX][perso.getY() + 1] == perso.getName().charAt(0)
+					|| dTest.map[tempX][perso.getY() - 1] == perso.getName().charAt(0))
+					&& dTest.map[tempX][tempY] != perso.getName().charAt(0));
+		}
+
 	}
 
 	@Test
@@ -228,14 +259,39 @@ class DataTest {
 
 		Perso p = new Player("Ad", 1, 1);
 		dTest.map[p.getX()][p.getY()] = p.getName().charAt(0);
+		dTest.alPerso.add(p);
+
+		int tempX = p.getX();
+		int tempY = p.getY();
 
 		// WHEN
 		Utility.movePerso(dTest);
 
 		// THEN
-		assertTrue(dTest.map[p.getX() + 1][p.getY()] == p.getName().charAt(0) //
-				|| dTest.map[p.getX()][p.getY() - 1] == p.getName().charAt(0) //
-				|| dTest.map[p.getX()][p.getY()] == p.getName().charAt(0));
+		assertTrue(dTest.map[p.getX() + 1][tempY] == p.getName().charAt(0) //
+				|| dTest.map[tempX][p.getY() - 1] == p.getName().charAt(0) //
+				|| dTest.map[tempX][tempY] == p.getName().charAt(0));
+	}
+
+	@Test
+	public void moveEnemyOnMapBorderKOTest() {
+		// GIVEN
+		Utility.fillMap(dTest);
+
+		Perso p = new Enemy("En", 1, 1);
+		dTest.map[p.getX()][p.getY()] = p.getName().charAt(0);
+		dTest.alPerso.add(p);
+
+		int tempX = p.getX();
+		int tempY = p.getY();
+
+		// WHEN
+		Utility.movePerso(dTest);
+
+		// THEN
+		assertTrue(dTest.map[p.getX() + 1][tempY] == p.getName().charAt(0) //
+				|| dTest.map[tempX][p.getY() - 1] == p.getName().charAt(0) //
+				|| dTest.map[tempX][tempY] == p.getName().charAt(0));
 	}
 
 }

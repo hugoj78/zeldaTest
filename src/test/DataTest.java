@@ -368,6 +368,48 @@ class DataTest {
 	}
 
 	@Test
+	public void conflictAndGameOverTest() {
+
+		// GIVEN
+		Utility.fillMap(dTest);
+
+		Perso p = new Enemy("Pl", 5, 5);
+		dTest.map[p.getX()][p.getY()] = p.getName().charAt(0);
+		dTest.alPerso.add(p);
+
+		Perso e = new Enemy("En", 6, 5);
+		dTest.map[e.getX()][e.getY()] = e.getName().charAt(0);
+		dTest.alPerso.add(e);
+
+		// WHEN
+		boolean result = Utility.isGameOn(p, dTest, 1, 0);
+
+		// THEN
+		assertFalse(result);
+	}
+
+	@Test
+	public void noConflictAndGameOnTest() {
+
+		// GIVEN
+		Utility.fillMap(dTest);
+
+		Perso p = new Enemy("Pl", 5, 5);
+		dTest.map[p.getX()][p.getY()] = p.getName().charAt(0);
+		dTest.alPerso.add(p);
+
+		Perso e = new Enemy("En", 6, 5);
+		dTest.map[e.getX()][e.getY()] = e.getName().charAt(0);
+		dTest.alPerso.add(e);
+
+		// WHEN
+		boolean result = Utility.isGameOn(p, dTest, 0, 1);
+
+		// THEN
+		assertTrue(result);
+	}
+
+	@Test
 	public void movePlayerTowardsEnemySpotTest() {
 		Utility.fillMap(dTest);
 

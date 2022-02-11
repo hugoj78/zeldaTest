@@ -170,4 +170,7 @@ public class Utility {
 		}
 	}
 
+	public static boolean isGameOn(Perso p, Data d, int x, int y) {
+		return d.map[p.getX() + x][p.getY() + y] == ' ';
+	}
 }

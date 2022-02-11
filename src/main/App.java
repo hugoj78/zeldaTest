@@ -19,6 +19,12 @@ public class App {
 		System.out.println("\n---- Placement ----\n");
 
 		Utility.printMap(d);
+
+		System.out.println("\n---- Deplacement ----\n");
+
+		Utility.movePerso(d);
+		Utility.printMap(d);
+
 	}
 
 }

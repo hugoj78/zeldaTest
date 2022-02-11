@@ -71,8 +71,56 @@ public class Utility {
 	}
 
 	public static void movePerso(Data d) {
-		for (Perso element : d.alPerso) {
+		for (Perso perso : d.alPerso) {
+			if (perso.getName().charAt(0) == 'P') {
 
+				String inputString = inputString();
+
+				switch (inputString) {
+				case "q":
+					if (d.map[perso.getX()][perso.getY() - 1] == ' ') {
+
+						d.map[perso.getX()][perso.getY()] = ' ';
+						perso.setY(perso.getY() - 1);
+						d.map[perso.getX()][perso.getY()] = perso.getName().charAt(0);
+
+					}
+					break;
+				case "s":
+					if (d.map[perso.getX() + 1][perso.getY()] == ' ') {
+
+						d.map[perso.getX()][perso.getY()] = ' ';
+						perso.setX(perso.getX() + 1);
+						d.map[perso.getX()][perso.getY()] = perso.getName().charAt(0);
+
+					}
+					break;
+				case "d":
+					if (d.map[perso.getX()][perso.getY() + 1] == ' ') {
+
+						d.map[perso.getX()][perso.getY()] = ' ';
+						perso.setY(perso.getY() + 1);
+						d.map[perso.getX()][perso.getY()] = perso.getName().charAt(0);
+
+					}
+					break;
+				case "z":
+					if (d.map[perso.getX() - 1][perso.getY()] == ' ') {
+
+						d.map[perso.getX()][perso.getY()] = ' ';
+						perso.setX(perso.getX() - 1);
+						d.map[perso.getX()][perso.getY()] = perso.getName().charAt(0);
+
+					}
+					break;
+
+				default:
+					System.out.println("Mauvaise Saisie");
+				}
+
+			} else if (perso.getName().charAt(0) == 'E') {
+
+			}
 		}
 	}
 

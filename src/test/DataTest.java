@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import model.Data;
+import model.Enemy;
 import model.Perso;
 import model.Player;
 import utility.Utility;
@@ -184,6 +185,9 @@ class DataTest {
 		Perso p = new Player("Ad", 5, 5);
 		dTest.map[p.getX()][p.getY()] = p.getName().charAt(0);
 
+		int tempX = p.getX();
+		int tempY = p.getY();
+
 		// WHEN
 		Utility.movePerso(dTest);
 
@@ -192,7 +196,29 @@ class DataTest {
 				|| dTest.map[p.getX() - 1][p.getY()] == p.getName().charAt(0)
 				|| dTest.map[p.getX()][p.getY() + 1] == p.getName().charAt(0)
 				|| dTest.map[p.getX()][p.getY() - 1] == p.getName().charAt(0))
-				&& dTest.map[p.getX()][p.getY()] != p.getName().charAt(0));
+				&& dTest.map[tempX][tempY] != p.getName().charAt(0));
+	}
+
+	@Test
+	public void moveEnemyOnMapSuccessTest() {
+		// GIVEN
+		Utility.fillMap(dTest);
+
+		Perso p = new Enemy("En", 5, 5);
+		dTest.map[p.getX()][p.getY()] = p.getName().charAt(0);
+
+		int tempX = p.getX();
+		int tempY = p.getY();
+
+		// WHEN
+		Utility.movePerso(dTest);
+
+		// THEN
+		assertTrue((dTest.map[p.getX() + 1][p.getY()] == p.getName().charAt(0)
+				|| dTest.map[p.getX() - 1][p.getY()] == p.getName().charAt(0)
+				|| dTest.map[p.getX()][p.getY() + 1] == p.getName().charAt(0)
+				|| dTest.map[p.getX()][p.getY() - 1] == p.getName().charAt(0))
+				&& dTest.map[tempX][tempY] != p.getName().charAt(0));
 	}
 
 	@Test
@@ -207,8 +233,8 @@ class DataTest {
 		Utility.movePerso(dTest);
 
 		// THEN
-		assertTrue(dTest.map[p.getX() + 1][p.getY()] == '0' //
-				|| dTest.map[p.getX()][p.getY() - 1] == '0' //
+		assertTrue(dTest.map[p.getX() + 1][p.getY()] == p.getName().charAt(0) //
+				|| dTest.map[p.getX()][p.getY() - 1] == p.getName().charAt(0) //
 				|| dTest.map[p.getX()][p.getY()] == p.getName().charAt(0));
 	}
 

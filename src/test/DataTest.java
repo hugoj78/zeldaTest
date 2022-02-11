@@ -178,7 +178,7 @@ class DataTest {
 	}
 
 	@Test
-	public void movePlayerOnMapSuccessTest() {
+	public void moveQPlayerOnMapSuccessTest() {
 		// GIVEN
 		Utility.fillMap(dTest);
 
@@ -191,6 +191,78 @@ class DataTest {
 
 		// WHEN
 		Utility.switchMovePlayer(dTest, p, "q");
+		// Utility.movePerso(dTest);
+
+		// THEN
+		assertTrue((dTest.map[tempX + 1][tempY] == p.getName().charAt(0)
+				|| dTest.map[tempX - 1][tempY] == p.getName().charAt(0)
+				|| dTest.map[tempX][tempY + 1] == p.getName().charAt(0)
+				|| dTest.map[tempX][tempY - 1] == p.getName().charAt(0))
+				&& dTest.map[tempX][tempY] != p.getName().charAt(0));
+	}
+
+	@Test
+	public void moveSPlayerOnMapSuccessTest() {
+		// GIVEN
+		Utility.fillMap(dTest);
+
+		Perso p = new Player("Ad", 5, 5);
+		dTest.map[p.getX()][p.getY()] = p.getName().charAt(0);
+		dTest.alPerso.add(p);
+
+		int tempX = p.getX();
+		int tempY = p.getY();
+
+		// WHEN
+		Utility.switchMovePlayer(dTest, p, "s");
+		// Utility.movePerso(dTest);
+
+		// THEN
+		assertTrue((dTest.map[tempX + 1][tempY] == p.getName().charAt(0)
+				|| dTest.map[tempX - 1][tempY] == p.getName().charAt(0)
+				|| dTest.map[tempX][tempY + 1] == p.getName().charAt(0)
+				|| dTest.map[tempX][tempY - 1] == p.getName().charAt(0))
+				&& dTest.map[tempX][tempY] != p.getName().charAt(0));
+	}
+
+	@Test
+	public void moveDPlayerOnMapSuccessTest() {
+		// GIVEN
+		Utility.fillMap(dTest);
+
+		Perso p = new Player("Ad", 5, 5);
+		dTest.map[p.getX()][p.getY()] = p.getName().charAt(0);
+		dTest.alPerso.add(p);
+
+		int tempX = p.getX();
+		int tempY = p.getY();
+
+		// WHEN
+		Utility.switchMovePlayer(dTest, p, "d");
+		// Utility.movePerso(dTest);
+
+		// THEN
+		assertTrue((dTest.map[tempX + 1][tempY] == p.getName().charAt(0)
+				|| dTest.map[tempX - 1][tempY] == p.getName().charAt(0)
+				|| dTest.map[tempX][tempY + 1] == p.getName().charAt(0)
+				|| dTest.map[tempX][tempY - 1] == p.getName().charAt(0))
+				&& dTest.map[tempX][tempY] != p.getName().charAt(0));
+	}
+
+	@Test
+	public void moveZPlayerOnMapSuccessTest() {
+		// GIVEN
+		Utility.fillMap(dTest);
+
+		Perso p = new Player("Ad", 5, 5);
+		dTest.map[p.getX()][p.getY()] = p.getName().charAt(0);
+		dTest.alPerso.add(p);
+
+		int tempX = p.getX();
+		int tempY = p.getY();
+
+		// WHEN
+		Utility.switchMovePlayer(dTest, p, "z");
 		// Utility.movePerso(dTest);
 
 		// THEN

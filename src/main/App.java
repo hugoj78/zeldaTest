@@ -20,9 +20,9 @@ public class App {
 
 		Utility.printMap(d);
 
-		System.out.println("\n---- Deplacement ----\n");
-
 		while (true) {
+			System.out.println("\n---- Deplacement ----\n");
+			Utility.printMap(d);
 			Utility.movePerso(d);
 			Utility.printMap(d);
 		}

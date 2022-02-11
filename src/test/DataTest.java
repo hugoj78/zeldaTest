@@ -182,7 +182,7 @@ class DataTest {
 		// GIVEN
 		Utility.fillMap(dTest);
 
-		Perso p = new Player("Ad", 5, 5);
+		Perso p = new Player("Pl", 5, 5);
 		dTest.map[p.getX()][p.getY()] = p.getName().charAt(0);
 		dTest.alPerso.add(p);
 
@@ -206,7 +206,7 @@ class DataTest {
 		// GIVEN
 		Utility.fillMap(dTest);
 
-		Perso p = new Player("Ad", 5, 5);
+		Perso p = new Player("Pl", 5, 5);
 		dTest.map[p.getX()][p.getY()] = p.getName().charAt(0);
 		dTest.alPerso.add(p);
 
@@ -230,7 +230,7 @@ class DataTest {
 		// GIVEN
 		Utility.fillMap(dTest);
 
-		Perso p = new Player("Ad", 5, 5);
+		Perso p = new Player("Pl", 5, 5);
 		dTest.map[p.getX()][p.getY()] = p.getName().charAt(0);
 		dTest.alPerso.add(p);
 
@@ -254,7 +254,7 @@ class DataTest {
 		// GIVEN
 		Utility.fillMap(dTest);
 
-		Perso p = new Player("Ad", 5, 5);
+		Perso p = new Player("Pl", 5, 5);
 		dTest.map[p.getX()][p.getY()] = p.getName().charAt(0);
 		dTest.alPerso.add(p);
 
@@ -330,7 +330,7 @@ class DataTest {
 		// GIVEN
 		Utility.fillMap(dTest);
 
-		Perso p = new Player("Ad", 1, 1);
+		Perso p = new Player("Pl", 1, 1);
 		dTest.map[p.getX()][p.getY()] = p.getName().charAt(0);
 		dTest.alPerso.add(p);
 
@@ -365,6 +365,69 @@ class DataTest {
 		assertTrue(dTest.map[tempX + 1][tempY] == p.getName().charAt(0) //
 				|| dTest.map[tempX][tempY + 1] == p.getName().charAt(0) //
 				|| dTest.map[tempX][tempY] == p.getName().charAt(0));
+	}
+
+	@Test
+	public void movePlayerTowardsEnemySpotTest() {
+		Utility.fillMap(dTest);
+
+		Perso p = new Player("Pl", 5, 5);
+		dTest.map[p.getX()][p.getY()] = p.getName().charAt(0);
+		dTest.alPerso.add(p);
+
+		Perso e = new Enemy("En", 6, 5);
+		dTest.map[e.getX()][e.getY()] = e.getName().charAt(0);
+		dTest.alPerso.add(e);
+
+		// WHEN
+		Utility.switchMovePlayer(dTest, dTest.alPerso.get(0), "s"); // x + 1
+
+		// THEN
+		assertEquals(2, dTest.alPerso.size());
+		assertEquals(dTest.alPerso.get(0).getX(), dTest.alPerso.get(1).getX());
+		assertEquals(dTest.alPerso.get(0).getY(), dTest.alPerso.get(1).getY());
+	}
+
+	@Test
+	public void moveEnemyTowardsPlayerSpotTest() {
+		Utility.fillMap(dTest);
+
+		Perso p = new Player("Pl", 6, 5);
+		dTest.map[p.getX()][p.getY()] = p.getName().charAt(0);
+		dTest.alPerso.add(p);
+
+		Perso e = new Enemy("En", 5, 5);
+		dTest.map[e.getX()][e.getY()] = e.getName().charAt(0);
+		dTest.alPerso.add(e);
+
+		// WHEN
+		Utility.switchMovePlayer(dTest, dTest.alPerso.get(1), "s"); // x + 1
+
+		// THEN
+		assertEquals(2, dTest.alPerso.size());
+		assertEquals(dTest.alPerso.get(0).getX(), dTest.alPerso.get(1).getX());
+		assertEquals(dTest.alPerso.get(0).getY(), dTest.alPerso.get(1).getY());
+	}
+
+	@Test
+	public void moveEnemyTowardsEnemySpotTest() {
+		Utility.fillMap(dTest);
+
+		Perso p = new Enemy("Pl", 5, 5);
+		dTest.map[p.getX()][p.getY()] = p.getName().charAt(0);
+		dTest.alPerso.add(p);
+
+		Perso e = new Enemy("En", 6, 5);
+		dTest.map[e.getX()][e.getY()] = e.getName().charAt(0);
+		dTest.alPerso.add(e);
+
+		// WHEN
+		Utility.switchMovePlayer(dTest, dTest.alPerso.get(0), "s"); // x + 1
+
+		// THEN
+		assertEquals(2, dTest.alPerso.size());
+		assertEquals(dTest.alPerso.get(0).getX(), dTest.alPerso.get(1).getX());
+		assertEquals(dTest.alPerso.get(0).getY(), dTest.alPerso.get(1).getY());
 	}
 
 }

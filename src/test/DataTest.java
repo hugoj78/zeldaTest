@@ -425,9 +425,7 @@ class DataTest {
 		Utility.switchMovePlayer(dTest, dTest.alPerso.get(0), "s"); // x + 1
 
 		// THEN
-		assertEquals(2, dTest.alPerso.size());
-		assertEquals(dTest.alPerso.get(0).getX(), dTest.alPerso.get(1).getX());
-		assertEquals(dTest.alPerso.get(0).getY(), dTest.alPerso.get(1).getY());
+		assertFalse(Utility.movePerso(dTest));
 	}
 
 	@Test

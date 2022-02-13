@@ -70,7 +70,9 @@ public class Utility {
 
 	}
 
-	public static void movePerso(Data d) {
+	public static boolean movePerso(Data d) {
+		boolean isGameOn = true;
+
 		for (Perso perso : d.alPerso) {
 			if (perso.getName().charAt(0) == 'P') {
 
@@ -124,6 +126,8 @@ public class Utility {
 				}
 			}
 		}
+
+		return isGameOn;
 	}
 
 	public static void switchMovePlayer(Data d, Perso perso, String inputString) {
